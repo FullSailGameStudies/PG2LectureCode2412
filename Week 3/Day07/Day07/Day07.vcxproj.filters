@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{5cb16b97-cc35-4fb6-bd55-3fe030fff458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc\Console">
+      <UniqueIdentifier>{d9438085-b394-41bb-b18a-014f3de4d418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc\Input">
+      <UniqueIdentifier>{07155f3a-63c9-4685-9bab-44a5a0974078}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Day07.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Console\Console.cpp">
+      <Filter>Misc\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Shared\Input\Input.cpp">
+      <Filter>Misc\Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Shared\Console\Console.h">
+      <Filter>Misc\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Shared\Input\Input.h">
+      <Filter>Misc\Input</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
