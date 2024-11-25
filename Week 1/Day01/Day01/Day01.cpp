@@ -21,6 +21,8 @@ void print(const std::vector<std::string>& names)
 
 int main()
 {
+    std::cout << "Aquaman stinks (literally).\n";
+
     //Input and Console examples   
     // 
     //std::string myName = Input::GetString("What is your name?");
