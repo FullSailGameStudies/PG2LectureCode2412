@@ -4,6 +4,7 @@
 #include "Calculator.h"
 #include "Console.h"
 #include "Input.h"
+#include <Menu.h>
 
 int AddOne(int localNumber)
 {
@@ -34,6 +35,21 @@ int main()
     Console::WriteLine("Hello Gotham.");
     Console::SetCursorLeft(15);
     Console::WriteLine("Hello PG2!", ConsoleColor::Yellow, ConsoleColor::Red);
+
+    int w = Console::GetWindowWidth();
+    int h = Console::GetWindowHeight();
+
+    int midX = w / 2 - 6, midY = h/2;
+    for(int i = 0;i< 100;i++)
+    {
+        Console::SetCursorPosition(rand() % w, rand() % h);
+        Console::Write("na ", (ConsoleColor)(rand()%8));
+        if (rand() % 5000 == 0)
+        {
+            Console::SetCursorPosition(midX, midY);
+            Console::Write("   BATMAN   ", (ConsoleColor)(rand() % 8));
+        }
+    }
     Input::PressEnter("Press enter to continue...", true);
 
     /*
@@ -64,8 +80,26 @@ int main()
 
     //calling a non-static method, use the variable...
     Calculator t1000;
+    //Calculator::minus(7, 2);
     int diff = t1000.minus(7, 2);
 
+    Console::Clear();
+
+    Menu cafe;
+    cafe.AddMenuItem("Spaghetti");
+    cafe.AddMenuItem("Calzone");
+    cafe.AddMenuItem("Hawaiian Pizza");
+    std::string item = "Meatballs";
+    cafe.AddMenuItem(item);
+    cafe.Show();
+    Input::PressEnter("", true);
+
+    item = "hawaiian pizza";
+    bool wasRemoved = cafe.RemoveMenuItem(item);
+    if (wasRemoved)
+        std::cout << item << " was removed from the menu.\n";
+    else
+        std::cout << item << " was not found.\n";
 
     /*
         CHALLENGE:
