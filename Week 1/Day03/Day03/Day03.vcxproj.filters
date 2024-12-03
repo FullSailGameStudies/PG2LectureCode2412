@@ -33,6 +33,9 @@
     <ClCompile Include="..\..\..\Shared\Input\Input.cpp">
       <Filter>Misc\Input</Filter>
     </ClCompile>
+    <ClCompile Include="ThemeSong.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Shared\Console\Console.h">
@@ -40,6 +43,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Shared\Input\Input.h">
       <Filter>Misc\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ThemeSong.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

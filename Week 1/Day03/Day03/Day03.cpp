@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include "ThemeSong.h"
 
 std::string postFix(std::string fileName, int postFixNumber = 1) //postFixNumber is optional
 {
@@ -36,14 +37,18 @@ int main()
     /*
         CHALLENGE 1:
 
-            Write a method called batTheme.
-            Add an optional parameter to determine how many "na" are printed. The default value should be 13.
+            Add a method called batTheme to the ThemeSong class.
+            Add an optional parameter to determine how many "na" are printed. 
+            The default value should be 13.
             
             If the calling code does not pass a value for the parameter, print "na na na na na na na na na na na na na Batman".
             If a value is passed, print the number of "na" equal to the value.
             EX: if 6 is passed, print "na na na na na na Batman"
 
     */
+    ThemeSong songs;
+    songs.batTheme();
+    songs.batTheme(25);
 
 
 
@@ -67,6 +72,7 @@ int main()
 
     //1) copy each element manually
     std::vector<int> scores2;
+    scores2.reserve(scores.size());
     for (size_t i = 0; i < scores.size(); i++)
         scores2.push_back(scores[i]);
 
@@ -75,6 +81,10 @@ int main()
 
     //3) passing a vector to the constructor of another vector
     std::vector<int> scores4(scores);
+
+    std::cout << "Scores2: size: " << scores2.size() << "  capacity: " << scores2.capacity() << "\n";
+    std::cout << "Scores3: size: " << scores3.size() << "  capacity: " << scores3.capacity() << "\n";
+    std::cout << "Scores4: size: " << scores4.size() << "  capacity: " << scores4.capacity() << "\n";
 
 
 
