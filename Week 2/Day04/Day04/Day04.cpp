@@ -11,145 +11,174 @@
 
 std::string toUpper(const std::string& original)
 {
-    std::string copy = original;
-    for (auto& c : copy)
-        c = toupper(c);
-    return copy;
+	std::string copy = original;
+	for (auto& c : copy)
+		c = toupper(c);
+	return copy;
 }
 
 void recursiveLoop(int N)
 {
-    recursiveLoop(N + 1);
-}
+	//all recursive methods REQUIRE an exit condition to prevent a stack overflow exception
+	//loop 1000 times
+	if (N >= 1000) return;//loops while this condition is false
+	//if (N < 1000)//loops while this condition is true
+	{
+		std::cout << N << "\n";//the going OUT loop
+		recursiveLoop(N + 1);
+		std::cout << N << "\n";//the coming BACK loop. (unwinding the stack)
+	}
+}//when it finishes, WHERE does it return to? WHOEVER called it
 
 unsigned long factorial(unsigned int N)
 {
-    if (N <= 1) return 1; //here's the exit condition!
-    return N * factorial(N - 1);
+	if (N <= 1) return 1; //here's the exit condition!
+	return N * factorial(N - 1);
 }
 
 /*
-    ╔═══════╗
-    ║Sorting║
-    ╚═══════╝
+	╔═══════╗
+	║Sorting║
+	╚═══════╝
 
-    Sorting is used to order the items in a vector/array is a specific way
+	Sorting is used to order the items in a vector/array is a specific way
 
-    CHALLENGE 2:
+	CHALLENGE 2:
 
-        Convert this BubbleSort pseudo-code into a method
+		Convert this BubbleSort pseudo-code into a method
 
-        procedure bubbleSort(A : list of sortable items)
-          n := length(A)
-          repeat
-              swapped := false
-              for i := 1 to n - 1 inclusive do
-                  if A[i - 1] > A[i] then
-                      swap(A, i - 1, i)
-                      swapped = true
-                  end if
-              end for
-              n := n - 1
-          while swapped
-        end procedure
+		procedure bubbleSort(A : list of sortable items)
+		  n := length(A)
+		  repeat
+			  swapped := false
+			  for i := 1 to n - 1 inclusive do
+				  if A[i - 1] > A[i] then
+					  swap(A, i - 1, i)
+					  swapped = true
+				  end if
+			  end for
+			  n := n - 1
+		  while swapped
+		end procedure
 
 */
 
+void bubbleSort(std::vector<std::string>& A)//procedure bubbleSort(A : list of sortable items)
+{
+	int n = A.size();//n := length(A)
+	bool swapped = false;
+	do //repeat
+	{
+		swapped = false;//swapped := false
+		for (int i = 1; i <= n - 1; i++)//for i := 1 to n - 1 inclusive do
+		{
+			int compare = _stricmp(A[i - 1].c_str(), A[i].c_str());
+			if (compare > 0)//A[i - 1] > A[i])//if A[i - 1] > A[i] then
+			{
+				std::swap(A[i - 1], A[i]); //swap(A, i - 1, i);
+				swapped = true;//swapped = true
+			}//end if
+		}//end for
+		--n;//n := n - 1
+	} while (swapped);//while swapped
+}//end procedure
+
 int main()
 {
-    std::vector<std::string> names = { "Wonder Woman", "Superman", "Batman", "Flash", "Aquaman" };
-    //call your BubbleSort on the names vector.
+	std::vector<std::string> names = { "Wonder Woman", "superman", "Batman", "Flash", "Aquaman" };
+	//call your BubbleSort on the names vector.
 
-    Console::WriteLine("--UNSORTED--", ConsoleColor::Yellow);
-    //print the sorted vector.
-    for (auto& name : names)
-        std::cout << name << "\n";
+	Console::WriteLine("--UNSORTED--", ConsoleColor::Yellow);
+	//print the sorted vector.
+	for (auto& name : names)
+		std::cout << name << "\n";
 
-    //call BubbleSort
+	//call BubbleSort
+	bubbleSort(names);
 
-    Console::WriteLine("--SORTED--", ConsoleColor::Yellow);
-    //print the sorted vector.
-    for (auto& name : names)
-        std::cout << name << "\n";
+	Console::WriteLine("--SORTED--", ConsoleColor::Yellow);
+	//print the sorted vector.
+	for (auto& name : names)
+		std::cout << name << "\n";
 
+	std::cin.get();
+	/*
+		╔═════════╗
+		║Recursion║
+		╚═════════╝
 
-    /*
-        ╔═════════╗
-        ║Recursion║
-        ╚═════════╝
+		Recursion happens when a method calls itself. This creates a recursive loop.
 
-        Recursion happens when a method calls itself. This creates a recursive loop.
+		All recursive methods need an exit condition, something that prevents the loop from continuing.
 
-        All recursive methods need an exit condition, something that prevents the loop from continuing.
-
-    */
-    int N = 0;
-    recursiveLoop(N);
-
-
-    /*
-        CHALLENGE 1:
-
-            convert this for loop to a recursive method called Bats.
-            Call Bats here in Main.
-
-            for(int i = 0;i < 100;i++)
-            {
-                std::cout << (char)78 << (char)65 << ' ';
-            }
-    */
-    //call Bats here.
-
-    char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
-    for (auto ch : c) std::cout << ch;
+	*/
+	int N = 0;
+	recursiveLoop(N);
 
 
+	/*
+		CHALLENGE 1:
 
-    /*
-        ╔═════════════════╗
-        ║  Swapping Items ║
-        ╚═════════════════╝
+			convert this for loop to a recursive method called Bats.
+			Call Bats here in Main.
 
-        add #include <string_view>
-        make sure the project is using C++17 or greater.
+			for(int i = 0;i < 100;i++)
+			{
+				std::cout << (char)78 << (char)65 << ' ';
+			}
+	*/
+	//call Bats here.
 
-    */
-    std::cout << "\n\n---SWAPPING ITEMS---\n";
-    std::vector<int> nums = { 1,2,3,4,5 };
-    for (auto i : nums)
-        std::cout << i << " ";
-    std::cout << " (original)\n";
+	char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
+	for (auto ch : c) std::cout << ch;
 
-    //write code to swap 2 items in the vector
 
-    std::cout << " (after swapping)\n";
-    for (auto i : nums)
-        std::cout << i << " ";
 
-    /*
-        ╔═════════════════╗
-        ║Comparing Strings║
-        ╚═════════════════╝
+	/*
+		╔═════════════════╗
+		║  Swapping Items ║
+		╚═════════════════╝
 
-        the compare functions return an int that will tell you 
-        how the strings compare to each other.
-        < 0 means s1 is LESS THAN (or comes before) s2
-          0 means s1 is EQUAL TO s2
-        > 0 means s1 is GREATER THAN (or comes after) s2
+		add #include <string_view>
+		make sure the project is using C++17 or greater.
 
-        _stricmp: case-insensitive string comparison. 
-            The methods needs pointers to char arrays therefore 
-            you need to call c_str on the std::string
+	*/
+	std::cout << "\n\n---SWAPPING ITEMS---\n";
+	std::vector<int> nums = { 1,2,3,4,5 };
+	for (auto i : nums)
+		std::cout << i << " ";
+	std::cout << " (original)\n";
 
-        std::string::compare:  case-sensitive string comparison
-            If you want to ignore case, you can convert the strings 
-            to all uppercase/lowercase
+	//write code to swap 2 items in the vector
 
-    */
-    std::string s1 = "Batman", s2 = "Aquaman";
-    int compResult = _stricmp(s1.c_str(), s2.c_str());
-    //OR...
-    int compareResult = toUpper(s1).compare(toUpper(s2));
+	std::cout << " (after swapping)\n";
+	for (auto i : nums)
+		std::cout << i << " ";
+
+	/*
+		╔═════════════════╗
+		║Comparing Strings║
+		╚═════════════════╝
+
+		the compare functions return an int that will tell you
+		how the strings compare to each other.
+		< 0 means s1 is LESS THAN (or comes before) s2
+		  0 means s1 is EQUAL TO s2
+		> 0 means s1 is GREATER THAN (or comes after) s2
+
+		_stricmp: case-insensitive string comparison.
+			The methods needs pointers to char arrays therefore
+			you need to call c_str on the std::string
+
+		std::string::compare:  case-sensitive string comparison
+			If you want to ignore case, you can convert the strings
+			to all uppercase/lowercase
+
+	*/
+	std::string s1 = "Batman", s2 = "Aquaman";
+	int compResult = _stricmp(s1.c_str(), s2.c_str());
+	//OR...
+	int compareResult = toUpper(s1).compare(toUpper(s2));
 
 
 
