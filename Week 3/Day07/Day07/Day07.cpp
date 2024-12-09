@@ -2,8 +2,8 @@
 //
 
 #include <iostream>
-
-
+#include "Sword.h"
+#include "Person.h"
 /*              CLASSESS
 
             ╔═════╗ ╔═════════╗
@@ -55,9 +55,11 @@ int main()
             Create a Person class.
             Right-Click the project and select "Add > Class..."
 
+        CHALLENGE:
+            Add an age field and a name field to the Person class
     */
-
-
+    Sword sting("Sting", WeaponMaterial::Iron);//calls a constructor to create an instance
+    sting.DoIt2();
 
 
     /*
@@ -73,10 +75,6 @@ int main()
 
     */
 
-    /*
-        CHALLENGE:
-            Add an age field and a name field to the Person class
-    */
 
 
 
@@ -104,7 +102,8 @@ int main()
         CHALLENGE:
             write an ItsMyBirthday method. increment age and print out a happy message.
     */
-
+    Person arthur(12, "Arthur Curry");
+    arthur.ItsMyBirthday();
 
 
 
