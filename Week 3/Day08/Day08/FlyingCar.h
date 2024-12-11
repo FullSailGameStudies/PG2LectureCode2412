@@ -10,6 +10,8 @@ public:
 	{
 		//mModelYear = year; DO NOT DUPLICATE what the base does
 	}
+	std::string vehicleInformation() override;
+
 	void Stuff()
 	{
 		std::cout << mModelYear;

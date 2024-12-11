@@ -7,10 +7,25 @@
 #include "Polymorphism.h"
 #include "Car.h"
 #include "FlyingCar.h"
+#include "Pistol.h"
 
+int* PrintMe()
+{
+	static int i = 0;
+	//std::cout << (i++) << " ";//0 0 0 0 0 0 0 0 0 0
+	i++;
+	std::cout << &i << "\n";
+	return &i;
+}
 
 int main()
 {
+	for (size_t i = 0; i < 10; i++)
+	{
+		int* iPtr = PrintMe();
+		std::cout << *iPtr << "\n";
+	}
+	std::cout << "\n";
 	/*
 		╔═══════════════╗
 		║  Inheritance  ║
@@ -41,8 +56,10 @@ int main()
 
 	*/
 	Car myRide(1984, "Delorean", "DMC-7");
+	std::cout << "MyRide: " << myRide.vehicleInformation() << "\n";
 	//myRide.mModelYear++;
 	FlyingCar jetson(2025,"Tesla","CyberPlane",100);
+	std::cout << "jetson: " << jetson.vehicleInformation() << "\n";
 
 
 	/*
@@ -55,6 +72,16 @@ int main()
 			Add a constructor that calls the base constructor
 
 	*/
+	//Weapon wpn(10, 50);
+	Pistol pewpew(50, 100, 10, 15);
+	Pistol gun2(50, 100, 3, 15);
+	pewpew.Rounds();
+	pewpew.Rounds(13);
+
+	int n1 = 5, n2 = 2;
+	int n3 = n1 + n2;
+	pewpew = pewpew + gun2;
+
 
 
 

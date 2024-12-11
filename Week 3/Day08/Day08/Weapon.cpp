@@ -14,3 +14,8 @@ int Weapon::calcDamage()
 {
 	return rand() % (mDamage+1);
 }
+
+int Weapon::calcDamage(int modifier)
+{
+	return rand() % (mDamage + 1 + modifier);
+}

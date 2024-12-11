@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include <utility>
 class Pistol : public Weapon
 {
 public:
@@ -7,6 +8,14 @@ public:
 		Weapon(range, damage),
 		rounds_(rounds), magCapacity_(magCapacity)
 	{
+	}
+	int calcDamage() override;
+
+	Pistol operator+(const Pistol& otherPistol)
+	{
+		int newRounds = std::min(magCapacity_, rounds_ + otherPistol.rounds_);
+		Pistol newPistol(range(), damage(), newRounds, magCapacity_);
+		return newPistol;
 	}
 
 	int Rounds() const { return rounds_; }
