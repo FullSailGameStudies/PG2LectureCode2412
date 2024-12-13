@@ -2,6 +2,9 @@
 //
 
 #include <iostream>
+#include "Pistol.h"
+#include <vector>
+#include "Knife.h"
 
 
 class base
@@ -41,15 +44,21 @@ public:
 	int mModelYear; //each car has its own model year variable
 	static int mNumberOfCarsMade; //shared by ALL cars
 
+	//static methods:
+	//  there is NO this parameter
+	//	can ONLY access other static members (fields and methods)
 	static void reporting()
 	{
-		//std::cout << "Model year: " << mModelYear << "\n"; //ERROR! cannot access non-static members
+		//std::cout << "Model year: " << this->mModelYear << "\n"; //ERROR! cannot access non-static members
 		std::cout << "Number of cars made: " << mNumberOfCarsMade << "\n";
 	}
 
-	void vehicleInfo() //there's a hidden parameter called 'this'
+	//non-static methods: 
+	// there's a hidden parameter called 'this'
+	//	can access non-static AND static members
+	void vehicleInfo() 
 	{
-		std::cout << "Model Year: " << this->mModelYear << "\n";
+		std::cout << "Model Year: " << mModelYear << "\n";
 	}
 };
 //initialize explicitly using the class name scoping
@@ -59,7 +68,28 @@ int Car::mNumberOfCarsMade = 0;
 
 int main()
 {
+	int n = 5;
+	int* nPtr = &n;
+	std::cout << n << "\n" << &n << "\n" << nPtr << "\n";
+	std::cout << *nPtr << "\n";
 
+	int nums[]{ 1,2,3,4,5 };
+	//nPtr = nums;
+	std::cout << "array\n";
+	for (size_t i = 0; i < 15; i++)
+	{
+		std::cout << *nPtr << "\n";
+		nPtr++;
+	}
+
+	{
+		int* nPtr2 = new int(5);// "= new " means heap memory
+		std::cout << "\nHeap Data\n" << *nPtr2 << "\n";
+		nPtr = nPtr2;//copying the memory address
+		delete nPtr2;//frees the allocated memory
+	}
+
+	std::cout << "\nHeap Data\n"<< *nPtr << "\n";
 	/*
 		╔════════════╗
 		║ Unique_ptr ║
@@ -113,8 +143,42 @@ int main()
 
 	*/
 
+	Weapon* wpnPtr = new Weapon(50, 100);
+	Weapon* pWpn2 = wpnPtr;
+	delete wpnPtr;
+	wpnPtr = nullptr;
+	if(wpnPtr != nullptr)
+		wpnPtr->showMe();
 
+	auto uWpnPtr = std::make_unique<Weapon>(50, 100);
+	auto uWpnPtr3 = std::move(uWpnPtr);
+	std::unique_ptr<Weapon> uWpnPtr2(new Weapon(50, 100));
 
+	std::vector<std::unique_ptr<Weapon>> wpns;
+	wpns.push_back(std::move(uWpnPtr3));
+	wpns.push_back(std::make_unique<Pistol>(50, 100, 10, 15));//upcasting
+	wpns.push_back(std::make_unique<Knife>(3, 10, 15));
+	std::cout << "\nInventory:\n";
+	for (auto& wpn : wpns)
+	{
+		wpn->showMe();//virtual. runtime polymorphism
+		std::cout << "\n";
+	}
+
+	std::cout << "\nInventory:\n";
+	std::vector<Weapon*> wpns2;
+	wpns2.push_back(new Weapon(10, 20));
+	wpns2.push_back(new Pistol(50, 100, 10, 15));//converting to a Weapon
+	wpns2.push_back(new Knife(4, 10, 2));
+	for (auto& wpn : wpns2)
+	{
+		wpn->showMe();//non-virtual 
+		std::cout << "\n";
+	}
+	for (size_t i = 0; i < wpns2.size(); i++)
+	{
+		delete wpns2[i];
+	}
 
 	/*
 		╔══════════════════╗
@@ -131,9 +195,10 @@ int main()
 
 	*/
 	Car myRide(1988);
+	Car yourRide(2023);
 	Car::reporting();
 	myRide.vehicleInfo();//calling non-static methods. myRide is passed in for 'this'
-
+	yourRide.vehicleInfo();
 	/*
 
 		CHALLENGE:
