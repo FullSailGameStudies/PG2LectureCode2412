@@ -52,6 +52,7 @@ int main()
     */
 
 
+
     /*
 
         ╔═══════════════╗
@@ -64,6 +65,64 @@ int main()
 
         Lecture code: using the filePath variable, open an input file, use getline to read a line, print the line
     */
+    std::string fileName = "pg2_2412.csv";
+    std::string path = "C:\\temp\\2412\\", fullPath;
+    fullPath = path + fileName;
+    //1. open the file
+    std::ofstream outFile(fullPath);
+    char delimiter = '$';
+    if (outFile.is_open())
+    {
+        //2. write the file
+        //  << insertion operator
+        outFile << "Superman is an alien." << delimiter << 5 << delimiter << 42.0;
+        outFile << delimiter << true << delimiter << "Aquaman is 12 years old.";
+    }
+    else
+        std::cout << fullPath << " could not be opened.\n";
+
+
+    //3. close the file
+    outFile.close();
+
+    //1. open the file
+    std::ifstream inFile(fullPath);
+    if (inFile.is_open())
+    {
+        //2. read the file
+        std::string line;
+        std::getline(inFile, line);//reads 1 line from the file
+
+        //parse the string to get the individual pieces of data
+        std::string data;
+        std::stringstream lineStream(line);
+        std::getline(lineStream, data, delimiter);//tell getline what the delimiter is
+        std::cout << data << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        int iNum = std::stoi(data);
+        std::cout << iNum << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        double dNum = std::stod(data);
+        std::cout << dNum << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        //bool bVal = (data != "0");
+        //if (data == "0") bVal = false;
+        //else bVal = true;
+        bool bVal = std::stoi(data);
+        std::cout << bVal << "\n";
+
+        std::getline(lineStream, data, delimiter);
+        std::cout << data << "\n";
+    }
+    else
+        std::cout << fullPath << " could not be opened.\n";
+
+    //3. close the file
+    inFile.close();
+
 
 
     /*
@@ -103,4 +162,23 @@ int main()
     std::string multi = "Batman^Bruce Wayne^35#Superman^Clark Kent^25#Wonder Woman^Diana Prince^25#Aquaman^Arthur Curry^12";
     char collectionSeparator = '#';
     char objectSeparator = '^';
+
+    std::stringstream multiStream(multi);
+    while (!multiStream.eof())
+    {
+        //char tab = '\t';
+        std::string hero;
+        std::getline(multiStream, hero, collectionSeparator);
+
+        std::string name, secret, ageStr;
+        int age;
+        std::stringstream heroStream(hero);
+        std::getline(heroStream, name, objectSeparator);
+        std::getline(heroStream, secret, objectSeparator);
+        std::getline(heroStream, ageStr, objectSeparator);
+        age = std::stoi(ageStr);
+
+        std::cout << "Hello citizen! I am " << name << " (aka " << secret << ").";
+        std::cout << " I am " << age << " years old!\n";
+    }
 }
